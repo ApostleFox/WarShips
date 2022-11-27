@@ -32,7 +32,7 @@ public class Ship {
     public int readShipLength(){
         while (true){
             int value = scanner.nextInt();
-            if (0<value && value<= 100){
+            if (0<value && value<= fieldLength){
                 return value;} else {
                 System.out.println("Write a number from 1 to " + fieldLength);
             }
@@ -65,6 +65,7 @@ public class Ship {
                 }
                 if (sizeS == shipLength){
                     System.out.println("YOU WIN");
+                    break;
                 }
             }
             if (tmp != sizeS){
