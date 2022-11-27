@@ -1,69 +1,66 @@
 package com.study.test;
 
-
-
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Ship {
-    private int fieldSize; // Розмір поля
-    public int shipLength; // Розмір корабля
-    public int[] rndShip;
-    public void ship() {
-        int z = getFieldSize() - getShipLength();
-        int rnd = (int)(1 + Math.random()*(z+1));
-        int[] rndShip = new int[getShipLength()];
-        for (int i = 0; i<rndShip.length;i++){
-            rndShip[i] = rnd++;
-        }
-        System.out.println(Arrays.toString(rndShip));
+    private int fieldLength;
+    private int shipLength;
 
+    public int readShot(Scanner scan){
+        while (true){
+            int value = scan.nextInt();
+            if (0<value & value<=getFieldLength()){
+                return value; } else {
+                System.out.println("Write a number from 1 to " + getFieldLength());
+            }
+        }
+    }
+
+
+
+
+    public void fight(){
+        int differenceSize = getFieldLength() - getShipLength();
+        int rnd = (int)(1 + Math.random()*(differenceSize + 1));
+        int[] arrayShip = new int[getShipLength()];
+        for (int i = 0; i<arrayShip.length;i++){
+            arrayShip[i] = rnd++;
+        }
+        System.out.println(Arrays.toString(arrayShip));
         int sizeS = 0;
-        int[] arrayShip = rndShip;
         while (sizeS < getShipLength()){
             int tmp = -1;
-            System.out.println("choose");
-            Scanner nextHit = new Scanner(System.in);
-            int nHit = nextHit.nextInt();
-            for (int i =0; i< arrayShip.length; i++){
-                if ((nHit == arrayShip[i])){
+            System.out.println("Shot");
+            int nHit = readShot(new Scanner(System.in));
+            for (int i = 0; i< arrayShip.length; i++){
+                if (nHit == arrayShip[i]){
                     sizeS++;
                     arrayShip[i] = -1;
-                    System.out.println("You hit");
+                    System.out.println("You Hit");
                     tmp = sizeS;
                 }
                 if (sizeS == getShipLength()){
-                    System.out.println("You Win");
+                    System.out.println("YOU WIN");
                 }
-
-            } if(sizeS != tmp){
-                System.out.println("miss");
             }
-            if (nHit < 1 || nHit > getFieldSize()){
-                System.out.println("Choose your number from 1 to " + getFieldSize());
+            if (tmp != sizeS){
+                System.out.println("You Miss");
             }
         }
+
+
+    }
+
+    public int getFieldLength() {return fieldLength;}
+
+    public void setFieldLength(int fieldLength) {
+        this.fieldLength = fieldLength;
     }
 
     public int getShipLength() {return shipLength;}
-    public int getFieldSize() {return fieldSize;}
-    public int[] getRndShip() {return rndShip;}
-    public void setRndShip(int[] rnd) {this.rndShip = rndShip;}
 
     public void setShipLength(int shipLength) {
-        if(shipLength>0 & shipLength<=100) {
-            this.shipLength = shipLength;
-        } else {
-            System.out.println("Ведіть число від 1 до 100");
-        }
+        this.shipLength = shipLength;
     }
-    public void setFieldSize(int fieldSize) {
-        if(fieldSize>0 & fieldSize<=100) {
-            this.fieldSize = fieldSize;
-        } else {
-            System.out.println("Ведіть число від 1 до 100");
-        }
-    }
-
 }
-
