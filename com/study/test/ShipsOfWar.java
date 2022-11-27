@@ -38,7 +38,7 @@ public class ShipsOfWar  {
          readFieldLength(new Scanner(System.in));
          ship.setShipLength(readFieldLength(new Scanner(System.in)));
 
-         System.out.println("Ведіть розмір поля");
+         System.out.println("Ведіть розмір корабля");
          readShipLength(new Scanner(System.in));
          ship.setShipLength(readShipLength(new Scanner(System.in)));
 
