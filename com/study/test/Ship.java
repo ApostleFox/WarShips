@@ -6,33 +6,56 @@ import java.util.Scanner;
 public class Ship {
     private int fieldLength;
     private int shipLength;
-
-    public int readShot(Scanner scan){
+    private final Scanner scanner;
+    public Ship(Scanner scanner) {
+        this.scanner = scanner;
+    }
+    public int readShot(){
         while (true){
-            int value = scan.nextInt();
-            if (0<value & value<=getFieldLength()){
+            int value = scanner.nextInt();
+            if (0<value && value<=fieldLength){
                 return value; } else {
-                System.out.println("Write a number from 1 to " + getFieldLength());
+                System.out.println("Write a number from 1 to " + fieldLength);
+            }
+        }
+    }
+    public int readFieldLength(){
+        while (true){
+            int value = scanner.nextInt();
+            if (0<value && value<=100){
+                return value;} else {
+                System.out.println("Write a number from 1 to 100");
             }
         }
     }
 
-
-
+    public int readShipLength(){
+        while (true){
+            int value = scanner.nextInt();
+            if (0<value && value<= 100){
+                return value;} else {
+                System.out.println("Write a number from 1 to " + fieldLength);
+            }
+        }
+    }
 
     public void fight(){
-        int differenceSize = getFieldLength() - getShipLength();
+        System.out.println("Write a length Field");
+        fieldLength = readFieldLength();
+        System.out.println("Write a length Ship");
+        shipLength = readShipLength();
+        int differenceSize = fieldLength - shipLength;
         int rnd = (int)(1 + Math.random()*(differenceSize + 1));
-        int[] arrayShip = new int[getShipLength()];
+        int[] arrayShip = new int[shipLength];
         for (int i = 0; i<arrayShip.length;i++){
             arrayShip[i] = rnd++;
         }
         System.out.println(Arrays.toString(arrayShip));
         int sizeS = 0;
-        while (sizeS < getShipLength()){
+        while (sizeS < shipLength){
             int tmp = -1;
             System.out.println("Shot");
-            int nHit = readShot(new Scanner(System.in));
+            int nHit = readShot();
             for (int i = 0; i< arrayShip.length; i++){
                 if (nHit == arrayShip[i]){
                     sizeS++;
@@ -40,7 +63,7 @@ public class Ship {
                     System.out.println("You Hit");
                     tmp = sizeS;
                 }
-                if (sizeS == getShipLength()){
+                if (sizeS == shipLength){
                     System.out.println("YOU WIN");
                 }
             }
@@ -48,19 +71,5 @@ public class Ship {
                 System.out.println("You Miss");
             }
         }
-
-
-    }
-
-    public int getFieldLength() {return fieldLength;}
-
-    public void setFieldLength(int fieldLength) {
-        this.fieldLength = fieldLength;
-    }
-
-    public int getShipLength() {return shipLength;}
-
-    public void setShipLength(int shipLength) {
-        this.shipLength = shipLength;
     }
 }
